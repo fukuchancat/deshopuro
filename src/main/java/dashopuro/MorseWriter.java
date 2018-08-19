@@ -161,9 +161,12 @@ public class MorseWriter implements AutoCloseable {
 		stream.write(bytes);
 	}
 
-	public static void main(String[] args) throws IOException {
-		MorseWriter morseWriter = new MorseWriter("ha?");
-		Path path = Paths.get("./file/temp/0.wav");
-		morseWriter.write(path);
+	public static void main(String[] args) {
+		try (MorseWriter morseWriter = new MorseWriter("ago no pose")) {
+			Path path = Paths.get("./file/temp/ago no pose.wav");
+			morseWriter.write(path);
+		} catch (IOException e) {
+			e.printStackTrace();
+		}
 	}
 }

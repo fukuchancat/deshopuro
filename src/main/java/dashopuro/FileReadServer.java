@@ -58,7 +58,7 @@ public class FileReadServer implements AutoCloseable {
 
 		var path = Paths.get(stringBuffer.toString());
 		var writeBytes = Files.readAllBytes(path);
-		worker.write(ByteBuffer.wrap(writeBytes));
+		worker.write(ByteBuffer.wrap(writeBytes)).get();
 
 		worker.close();
 	}

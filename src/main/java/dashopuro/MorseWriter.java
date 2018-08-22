@@ -23,7 +23,6 @@ import lombok.Setter;
 @Getter
 @Setter
 public class MorseWriter implements AutoCloseable {
-	private static final AudioFormat FORMAT = new AudioFormat(8000f, 8, 1, true, false);
 	private static final Map<String, String> MORSE_MAP = new HashMap<>() {
 		private static final long serialVersionUID = 5829123569770090233L;
 		{
@@ -94,9 +93,10 @@ public class MorseWriter implements AutoCloseable {
 
 	public void write(Path path) throws IOException {
 		var dst = stream.toByteArray();
+		var format = new AudioFormat(8000f, 8, 1, true, false);
 		var pipedInputStream = new PipedInputStream();
 		var pipedOutputStream = new PipedOutputStream();
-		var audioInputStream = new AudioInputStream(pipedInputStream, FORMAT, dst.length);
+		var audioInputStream = new AudioInputStream(pipedInputStream, format, dst.length);
 
 		pipedOutputStream.connect(pipedInputStream);
 

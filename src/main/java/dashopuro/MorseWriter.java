@@ -111,6 +111,7 @@ public class MorseWriter implements AutoCloseable {
 				}
 			}
 		});
+		service.shutdown();
 
 		AudioSystem.write(audioInputStream, AudioFileFormat.Type.WAVE, path.toFile());
 		pipedOutputStream.close();
